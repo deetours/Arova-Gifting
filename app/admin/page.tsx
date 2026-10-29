@@ -1,0 +1,15 @@
+import type { Metadata } from "next";
+import { AdminNav } from "@/components/admin-nav";
+import Link from "next/link";
+import { listEnquiries } from "@/lib/enquiries";
+
+export const metadata: Metadata = { title: "Operations desk" };
+export const dynamic = "force-dynamic";
+
+export default function OperationsPage() {
+  if (process.env.NODE_ENV === "production") return <main className="admin-locked"><span className="eyebrow">AROVA / INTERNAL OPERATIONS</span><h1>Operations access<br /><em>is not configured.</em></h1><p>Internal enquiry records are disabled in production until an authentication provider and role policy are connected.</p></main>;
+  const enquiries = listEnquiries();
+  const received = enquiries.filter((item) => item.status === "received").length;
+  const qualifying = enquiries.filter((item) => item.status === "qualifying").length;
+  return <div className="admin-shell"><AdminNav /><header className="admin-heading"><div><span className="eyebrow">AROVA / OPERATIONS DESK</span><h1>Good morning.<br /><em>Here’s what needs a look.</em></h1></div><Link className="button button--dark" href="/admin/enquiries">Open enquiry desk <span aria-hidden="true">↗</span></Link></header><div className="dev-warning"><strong>Development operations view</strong><span>Local data only · production access is disabled until authentication is configured.</span></div><div className="admin-metrics"><div><span>NEW ENQUIRIES</span><strong>{String(received).padStart(2, "0")}</strong><small>Awaiting first review</small></div><div><span>IN QUALIFICATION</span><strong>{String(qualifying).padStart(2, "0")}</strong><small>Being reviewed</small></div><div><span>RECORDS IN VIEW</span><strong>{String(enquiries.length).padStart(2, "0")}</strong><small>Latest 100 enquiries</small></div></div><section className="admin-panel"><div className="admin-panel__heading"><div><span className="eyebrow">THE INBOX</span><h2>Recent enquiries</h2></div><Link className="text-link" href="/admin/enquiries">View all in the desk ↗</Link></div>{enquiries.length ? <div className="enquiry-table"><div className="enquiry-table__head"><span>REFERENCE / COMPANY</span><span>OCCASION</span><span>QUANTITY</span><span>STATUS</span><span>RECEIVED</span></div>{enquiries.slice(0, 8).map((item) => <Link className="enquiry-table__row" href={`/admin/enquiries/${encodeURIComponent(item.reference)}`} key={item.reference}><span><strong>{item.reference}</strong><small>{item.company}</small></span><span>{item.occasion.replaceAll("-", " ")}</span><span>{item.quantity.toLocaleString("en-IN")}</span><span><i className={`status-dot status-dot--${item.status}`} />{item.status}</span><span>{new Date(item.createdAt).toLocaleDateString("en-IN", { day: "2-digit", month: "short" })}</span></Link>)}</div> : <div className="empty-admin"><span className="empty-mark">00</span><h3>No enquiries yet.</h3><p>Submitted gifting briefs will appear here once saved.</p></div>}</section><p className="admin-footnote">Amounts, costs and conversion metrics are not shown because no approved pricing or reporting data source is configured.</p></div>;
+}
