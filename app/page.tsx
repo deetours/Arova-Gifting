@@ -19,7 +19,7 @@ export default function HomePage() {
       </section>
 
       <section className="collection-section section-pad" id="collections">
-        <SectionIntro index="01" eyebrow="THE COLLECTION INDEX" title="Start with the feeling.\nFind the right object." copy="Four starting directions for a gifting brief. Final products, options and availability are confirmed around your quantity, budget and date." href="/collections" action="View all collections" />
+        <SectionIntro index="01" eyebrow="THE COLLECTION INDEX" title={"Start with the feeling.\nFind the right object."} copy="Four starting directions for a gifting brief. Final products, options and availability are confirmed around your quantity, budget and date." href="/collections" action="View all collections" />
         <div className="collection-grid">{collections.map((collection) => <CollectionTile key={collection.slug} collection={collection} />)}</div>
       </section>
 
