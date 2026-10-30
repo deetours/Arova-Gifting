@@ -29,7 +29,7 @@ export default function HomePage() {
       </section>
 
       <section className="process-section section-pad">
-        <SectionIntro index="03" eyebrow="A CLEARER WAY THROUGH" title="From first thought\nto a gift, well made." copy="A considered process keeps the details close: what you need, what can be sourced, what the quote includes and what has been approved." href="/how-we-work" action="See how we work" />
+        <SectionIntro index="03" eyebrow="A CLEARER WAY THROUGH" title={"From first thought\nto a gift, well made."} copy="A considered process keeps the details close: what you need, what can be sourced, what the quote includes and what has been approved." href="/how-we-work" action="See how we work" />
         <div className="process-ribbon"><div><span>01</span><strong>Curate</strong><p>Share the moment, people and constraints.</p></div><i aria-hidden="true">→</i><div><span>02</span><strong>Confirm</strong><p>Review the options, costs and delivery details.</p></div><i aria-hidden="true">→</i><div><span>03</span><strong>Make it yours</strong><p>Approve the specifications before production.</p></div><i aria-hidden="true">→</i><div><span>04</span><strong>Deliver</strong><p>Follow the agreed fulfilment plan.</p></div></div>
         <p className="fine-print">The exact sequence, lead time and delivery commitment depend on the confirmed order and supplier availability.</p>
       </section>
