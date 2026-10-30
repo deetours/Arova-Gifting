@@ -1,10 +1,19 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Collection } from "@/lib/catalogue";
 
-export function ObjectStudy({ number, tone = "sand", label = "DESIGN STUDY · CONCEPT IMAGE" }: { number: string; tone?: string; label?: string }) {
+const collectionImages: Record<string, { src: string; alt: string }> = {
+  "welcome-editions": { src: "/images/home/collection-welcome-edition.webp", alt: "Welcome edition corporate gift set" },
+  "branded-essentials": { src: "/images/home/collection-branded-essentials.webp", alt: "Branded essentials gift collection" },
+  "executive-objects": { src: "/images/home/collection-executive-objects.webp", alt: "Executive gift objects" },
+  "seasonal-hampers": { src: "/images/home/collection-seasonal-hampers.webp", alt: "Seasonal corporate gift hamper" },
+};
+
+export function ObjectStudy({ number, tone = "sand", label = "DESIGN STUDY · CONCEPT IMAGE", imageSrc, imageAlt = "Corporate gifting collection photograph" }: { number: string; tone?: string; label?: string; imageSrc?: string; imageAlt?: string }) {
   return (
-    <div className={`object-study object-study--${tone}`} role="img" aria-label={`Abstract packaging illustration, design study ${number}`}>
-      <div className="study-frame"><span className="study-index">OBJECT STUDY / {number}</span><div className="study-object"><div className="study-lid" /><div className="study-box"><span className="study-mark">a.</span></div><div className="study-ribbon" /></div><span className="study-caption">{label}</span></div>
+    <div className={`object-study object-study--${tone}`}>
+      {imageSrc ? <Image className="object-study__image" src={imageSrc} alt={imageAlt} fill priority sizes="(max-width: 700px) 100vw, 50vw" /> : null}
+      <div className="study-frame" aria-hidden="true"><span className="study-index">OBJECT STUDY / {number}</span>{!imageSrc && <div className="study-object"><div className="study-lid" /><div className="study-box"><span className="study-mark">a.</span></div><div className="study-ribbon" /></div>}<span className="study-caption">{label}</span></div>
     </div>
   );
 }
@@ -12,7 +21,7 @@ export function ObjectStudy({ number, tone = "sand", label = "DESIGN STUDY · CO
 export function CollectionTile({ collection, compact = false }: { collection: Collection; compact?: boolean }) {
   return (
     <Link className={`collection-tile collection-tile--${collection.tone}${compact ? " collection-tile--compact" : ""}`} href={`/collections/${collection.slug}`}>
-      <div className="collection-tile__art"><span className="collection-tile__index">COLLECTION / {collection.index}</span><div className="tile-object"><span>{collection.index}</span></div><span className="collection-tile__arrow" aria-hidden="true">↗</span></div>
+      <div className="collection-tile__art">{collectionImages[collection.slug] && <Image src={collectionImages[collection.slug].src} alt={collectionImages[collection.slug].alt} fill sizes="(max-width: 700px) 50vw, 25vw" />}<span className="collection-tile__index">COLLECTION / {collection.index}</span><span className="collection-tile__arrow" aria-hidden="true">↗</span></div>
       <div className="collection-tile__copy"><span className="eyebrow">{collection.note}</span><h3>{collection.name}</h3><span className="text-link">Explore the direction <span aria-hidden="true">↗</span></span></div>
     </Link>
   );

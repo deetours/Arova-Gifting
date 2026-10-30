@@ -14,7 +14,7 @@ export default function HomePage() {
           <div className="hero-actions"><Link className="button button--dark" href="/build-a-kit">Build your gifting brief <span aria-hidden="true">↗</span></Link><Link className="text-link" href="/collections">Explore collections <span aria-hidden="true">↓</span></Link></div>
           <div className="hero-foot"><span>FOR TEAMS, CLIENTS<br />AND COMPANY MILESTONES</span><span>01—04<br />CURATED DIRECTIONS</span></div>
         </div>
-        <div className="hero-art"><ObjectStudy number="001" tone="sand" /><span className="hero-art-note">A visual study, not a product listing</span></div>
+        <div className="hero-art"><ObjectStudy number="001" tone="sand" imageSrc="/images/home/hero-gifting-editorial.webp" imageAlt="Thoughtfully arranged corporate gifts" label="AROVA / CORPORATE GIFTING" /><span className="hero-art-note">A visual study, not a product listing</span></div>
         <div className="hero-side-index" aria-hidden="true">AROVA / 01</div>
       </section>
 
