@@ -27,7 +27,7 @@ export function CollectionTile({ collection, compact = false }: { collection: Co
   );
 }
 
-export function SectionIntro({ index, eyebrow, title, copy, href, action }: { index: string; eyebrow: string; title: string; copy: string; href?: string; action?: string }) {
+export function SectionIntro({ index, eyebrow, title, copy, href, action }: { index: string; eyebrow: string; title: React.ReactNode; copy: string; href?: string; action?: string }) {
   return (
     <div className="section-intro">
       <div className="section-intro__label"><span className="eyebrow">{index} / {eyebrow}</span><i /></div>
